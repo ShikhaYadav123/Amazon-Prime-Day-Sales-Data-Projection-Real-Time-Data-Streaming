@@ -1,7 +1,7 @@
 # Amazon Prime Day Sales Data Projection (RealTime Data Streaming)
 **Overview**
 
-This project implements a real-time data engineering pipeline for ingesting, processing, and analyzing streaming data. The pipeline utilizes various AWS services and Python scripts to achieve end-to-end data processing and analysis capabilities.
+This project demonstrates a robust real-time data engineering pipeline built with AWS services and Python scripts to ingest, process, and analyze streaming sales data. The pipeline efficiently captures, transforms, and stores data, enabling real-time analytics and insights.
 
 **Architecture**
 
@@ -9,11 +9,11 @@ This project implements a real-time data engineering pipeline for ingesting, pro
 
 The architecture of the pipeline involves the following components:
 
-**Source Data Generation:** Python mock scripts generate real-time data as the source.
+**Source Data Generation:** Python scripts simulate real-time sales data.
 
 **Data Ingestion:** Boto3 library is used to ingest the generated data into DynamoDB.
 
-**Change Data Capture (CDC):** DynamoDB Streams capture any changes in the DynamoDB table.
+**Change Data Capture (CDC):** DynamoDB Streams track changes for real-time processing.
 
 **Streaming Data Processing:** EventBridge Pipe sends the DynamoDB stream records to a Kinesis stream.
 
@@ -21,24 +21,20 @@ The architecture of the pipeline involves the following components:
 
 **Data Transformation:** Lambda functions perform transformations on the accumulated records before dumping them into S3 in JSON format.
 
-**Metadata Preparation:** A Glue Crawler crawls the S3 bucket to prepare metadata, enabling querying of the data using Athena.
+**Metadata Preparation:** Transformed data is stored in S3, with metadata managed by AWS Glue, allowing for querying via Athena.
 
 **Setup**
-To set up the project, follow these steps:
 
-1.Configure AWS credentials and permissions for the Boto3 library to access DynamoDB AWS services.
+**1.AWS Configuration:** Set up AWS credentials for accessing DynamoDB and related services.
 
-2.Deploy the Python mock scripts to generate source data.
+**2.Deploy Scripts:** Run Python scripts to generate and ingest mock sales data.
 
-3.Set up DynamoDB tables and streams for data ingestion and CDC.
+**3.Configure Streams & Processing:** Set up DynamoDB Streams, EventBridge, Kinesis, and Lambda for real-time data processing.
 
-4.Create EventBridge rules and Kinesis streams for streaming data processing.
+**4.Data Storage:** Configure Kinesis Firehose and S3 for data storage.
 
-5.Configure Kinesis Firehose delivery streams and Lambda functions for data transformation.
+**5.Metadata Management:** Use Glue Crawlers to enable Athena queries on stored data.
 
-6.Set up a Glue Crawler to crawl the S3 bucket and prepare metadata for Athena.
-
-**Usage**
-Once the project is set up, the pipeline will automatically ingest, process, and analyze streaming data in real-time. Data engineers and analysts can query the data using Athena to derive insights and make near real time data-driven decisions.
-
+**Results**
+Once deployed, this pipeline continuously processes and stores real-time sales data, allowing for immediate analysis and insight generation through Athena queries.
 
